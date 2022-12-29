@@ -1,2 +1,19 @@
-.teste {
+.home {
+  margin-inline: 1rem;
+  min-height: 100vh;
+}
+.home__title {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  text-align: center;
+}
+.home__title h1 {
+  font-size: 3rem;
+  font-weight: 300;
+}
+.home__title p {
+  color: #dcdcdc;
+  font-weight: 300;
 }

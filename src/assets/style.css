@@ -9,11 +9,7 @@
 
 html {
   font-family: "Poppins", sans-serif;
-  color-scheme: dark light;
-}
-
-main {
-  min-height: 100vh;
+  color-scheme: dark;
 }
 
 img,
