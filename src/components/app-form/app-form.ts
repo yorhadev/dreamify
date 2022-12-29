@@ -1,3 +1,5 @@
+import { showSpinner, hideSpinner } from "../../composables/useSpinner";
+
 export function appForm(element: HTMLFormElement) {
   const formInnerHTML = `
     <label for="prompt">Prompt</label>
@@ -10,6 +12,8 @@ export function appForm(element: HTMLFormElement) {
   element.addEventListener("submit", async (event: SubmitEvent) => {
     event.preventDefault();
 
+    showSpinner();
+
     const baseUrl = "https://dreamify-api.netlify.app/";
 
     const data = new FormData(element);
@@ -20,10 +24,17 @@ export function appForm(element: HTMLFormElement) {
       body: JSON.stringify({ prompt: data.get("prompt") }),
     });
 
-    const { image } = await response.json();
+    if (response.ok) {
+      const { image } = await response.json();
 
-    const wrap = document.querySelector<HTMLFormElement>("#home__container")!;
+      const wrap = document.querySelector<HTMLFormElement>("#home__container")!;
 
-    wrap.innerHTML = `<img src="${image}" />`;
+      wrap.innerHTML = `<img src="${image}" alt="" />`;
+    } else {
+      const err = await response.text();
+      alert(err);
+    }
+
+    hideSpinner();
   });
 }
